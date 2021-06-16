@@ -1,0 +1,40 @@
+# Mostly Adequate Guide FP
+
+## Oh to Be Pure Again
+
+`순수함수`는 같은 input 값에는 항상 같은 output을 리턴해야 하고, 사이드 이펙트가 일어나서는 안되는 함수 입니다.
+`사이드 이펙트`는 예상하는 기대값 이외의 발생하는 모든 효과를 말합니다.
+
+- changing the file system
+- inserting a record into a database
+- making an http call
+- mutations
+- printing to the screen / logging
+- obtaining user input
+- querying the DOM
+- accessing system state
+
+함수 외부에서의 상호작용은 모두 사이드 이펙트 입니다.
+위와 같은 사이드 이펙트들이 없는 프로그래밍의 실용성을 의심하게 되는게 사실입니다. 하지만,
+함수형 프로그래밍의 철학은 사이드 이펙트들이 잘못된 동작의 주요 원인이라고 가정합니다.
+
+위 의 사항들을 사용하지 않는것이 아닌, 통제된 방식으로 컨트롤 가능하도록 실행하기를 원합니다.
+
+## The Case for Purity
+
+- Cacheable (캐싱)
+- Portable / Self-documenting (이식성, 주입(의존성))
+- Testable (테스팅)
+- Reasonable (referential transparency)
+- Parallel Code
+
+When was the last time you copied a method into a new app?
+One of my favorite quotes comes from Erlang creator,
+Joe Armstrong: "The problem with object-oriented languages is they’ve got all this implicit environment that they carry around with them. You wanted a banana but what you got was a gorilla holding the banana... and the entire jungle".
+
+## Currying
+
+순수함수는 하나의 인풋에 하나의 아웃풋을 갖습니다.
+커링은 이를 실현하게 해줍니다. 인풋을 함수로 받고 아웃풋을 함수로 받아도, 순수함수가 성립됩니다.
+
+---
