@@ -1,0 +1,21 @@
+## Currying
+
+순수함수는 하나의 인풋에 하나의 아웃풋을 갖습니다.
+커링은 이를 실현하게 해줍니다. 인풋을 함수로 받고 아웃풋을 함수로 받아도, 순수함수가 성립됩니다.
+
+```js
+const add = (x) => (y) => x + y;
+/**
+ * function add(x){
+ *  return function aisle(y){
+ *      return x + y
+ *  }
+ * }
+ **/
+
+const increment = add(1);
+const addTen = add(10);
+
+increment(2); // 3
+addTen(2); // 12
+```
