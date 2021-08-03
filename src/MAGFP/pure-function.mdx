@@ -1,8 +1,26 @@
 ## Oh to Be Pure Again
 
-`순수함수`는 같은 input 값에는 항상 같은 output을 리턴해야 하고, 사이드 이펙트가 일어나서는 안되는 함수 입니다.
+`순수함수`는 동일한 input 에는 항상 동일한 output을 리턴해야 하고, 사이드 이펙트가 없는 함수다.
+`slice` 와 `splice`는 같은 동작을 하나 pure/impure로 나뉜다.
+함수형 프로그래밍에서는 `splice` 같이 data를 변경시키는 다루기 힘든 함수를 싫어한다.
 
----
+```js
+// impure
+let minimum = 21;
+const checkAge = (age) => age >= minimum;
+
+// pure
+const chekcAge = (age) => {
+  const minimum = 21;
+  // const immutableState = Object.freeze({ minimum: 21 })
+  return age >= minimum;
+};
+```
+
+impure 부분에서는 chekcAge 함수가 mutable 한 변수인 minium에 의존하여 값을 결정한다.
+it depends on system state which is disappointing because it increases the cognitive load by introducing an external environment.
+위 예제에서는 많지 않아 보일 수 있지만, mutable한 변수에 의존도는 시스템 복잡성에 가장 큰 영향을 미치는 요인중 하나.
+외부 입력에 따라 다른 결과를 반환 한다.
 
 ## 사이드 이펙트
 
@@ -23,15 +41,33 @@
 
 위 의 사항들을 사용하지 않는것이 아닌, 통제된 방식으로 컨트롤 가능하도록 실행하기를 원합니다.
 
----
-
 ## The Case for Purity
 
-- Cacheable (캐싱)
-- Portable / Self-documenting (이식성, 주입(의존성))
-- Testable (테스팅)
-- Reasonable (referential transparency)
-- Parallel Code
+### Cacheable (캐싱)
+
+### Portable / Self-documenting (이식성, 주입(의존성), 자체 문서화)
+
+함수 의존성이 명시적이므로 보고 이해하기가 쉽다.
+
+```js
+// impure
+const signUp = (attrs) => {
+  const user = saveUser(attrs);
+  welcomeUser(user);
+};
+
+//pure
+const signUp = (Db, Email, attrs) => () => {
+  const user = saveUser(Db, attrs);
+  welcomeUser(Email, user);
+};
+```
+
+### Testable (테스팅)
+
+### Reasonable (referential transparency)
+
+### Parallel Code
 
 When was the last time you copied a method into a new app?
 One of my favorite quotes comes from Erlang creator,
