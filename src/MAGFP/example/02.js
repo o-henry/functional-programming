@@ -12,3 +12,21 @@ greeting("times"); // 'Hi times'
 const getServerStuff = (callback) => ajaxCall((json) => callback(json));
 // 똑똑한 방법
 const getServerStuff = ajaxCall;
+
+const { Map } = require("immutable");
+
+// Aliases: p = player, a = attacker, t = target
+const jobe = Map({ name: "Jobe", hp: 20, team: "red" });
+const michael = Map({ name: "Michael", hp: 20, team: "green" });
+
+const decrementHP = (p) => p.set("hp", p.get("hp") - 1);
+const isSameTeam = (p1, p2) => p1.get("team") === p2.get("team");
+const punch = (a, t) => (isSameTeam(a, t) ? t : decrementHP(t));
+
+punch(jobe, michael); // Map({name:'Michael', hp:19, team: 'green'})
+
+// inline the function
+const punch = (a, t) => (a.get("team") === t.get("team") ? t : decrementHP(t));
+const punch = (a, t) => ("red" === "green" ? t : decrementHP(t));
+const punch = (a, t) => decrementHP(t);
+const punch = (a, t) => t.set("hp", t.get("hp") - 1);
