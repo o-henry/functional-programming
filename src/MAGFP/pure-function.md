@@ -47,7 +47,7 @@ it depends on system state which is disappointing because it increases the cogni
 
 ### Portable / Self-documenting (이식성, 주입(의존성), 자체 문서화)
 
-함수 의존성이 명시적이므로 보고 이해하기가 쉽다.
+순수 함수는 완전히 자급자족 합니다. 우선 함수의 의존성(종속성)은 명확합니다. 따라서 보다 쉽게 보고 이해할 수 있습니다.
 
 ```js
 // impure
@@ -67,8 +67,10 @@ const signUp = (Db, Email, attrs) => () => {
 
 ### Reasonable (referential transparency)
 
+순수 기능으로 작업할 때 가장 큰 승리는  referential transparency(참조 투명성) 이라고 보는 시각이 많다. 프로그램의 동작을 변경하지 않고 평가된 값을 대체할 수 있는 코드 스폿은 참조적으로 투명합니다. 순수함수는 사이드 이펙트가 없기 때문에 출력값을 통해서만 프로그램의 동작에 영향을 줄 수 있습니다.
+또한 출력 값은 입력 값만 사용하여 신뢰성 있게 계산할 수 있으므로 순수 함수는 항상 참조 투명도를 유지합니다.
+코드에 대해 추론하는 이 기능은 일반적으로 코드를 리팩터링하고 이해하는데 매우 유용합니다.
+
 ### Parallel Code
 
-When was the last time you copied a method into a new app?
-One of my favorite quotes comes from Erlang creator,
-Joe Armstrong: "The problem with object-oriented languages is they’ve got all this implicit environment that they carry around with them. You wanted a banana but what you got was a gorilla holding the banana... and the entire jungle".
+공유 메모리에 액세스할 필요가 없고, 사이드 이펙트로 인해 경쟁 상태를 가질 수 없기 때문에 우리는 어떤 순수 함수라도 병렬로 실행할 수 있습니다. 이는 스레드가 있는 서버쪽 JS 환경뿐만 아니라 웹 작업자가 있는 브라우저 에서도 매우 가능하지만, 현재 문화는 회피하는 것으로 보입니다.
