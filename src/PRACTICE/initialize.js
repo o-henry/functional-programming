@@ -11,5 +11,3 @@ const initialize = (n) =>
       .map((y) => y[0] + ".")
       .join(" ")
   );
-
-console.log(initialize(["Stephen Hawking"]));

@@ -12,5 +12,3 @@ const solveForExp = (a: number, b: number): number =>
 
 // const solveForExp = (a: number, b: number, i = 1): number =>
 //   a ** i == b ? i : solveForExp(a, b, i + 1);
-
-console.log(solveForExp(a, b));
