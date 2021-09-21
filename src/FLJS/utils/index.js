@@ -59,6 +59,8 @@ function pipe(...fns) {
     let list = [...fns];
 
     while (list.length > 0) {
+      // list.shift() : fns 이므로 호출 가능하다.
+      // currying => result를 인자로 넘긴다.
       result = list.shift()(result);
     }
     return result;

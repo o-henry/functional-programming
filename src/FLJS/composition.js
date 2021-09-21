@@ -31,14 +31,13 @@ let letters = compose2(words, unique);
 
 // let chars = newUniqueWords("How are you Henry?"); // ['how', 'are', 'you', 'henry']
 let chars = letters("How are you Henry?"); //[ 'h', 'o', 'w', 'a', 'r', 'e', 'y', 'u', 'n' ]
-// 순서에 따라 값이 변한다. -> 순서가 중요하다 ?
 
 /**
- * @content { general composition }
+ * @topic { general composition }
  */
 
-// let biggerWords = compose(skipShortWords, unique, words);
-// let wordsbig = biggerWords(text);
+let biggerWords = compose(skipShortWords, unique, words);
+let wordsbig = biggerWords(text);
 
 let filterWords = partialRight(compose, unique, words);
 let shorterWords = filterWords(skipShortWords);
